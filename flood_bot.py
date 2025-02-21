@@ -57,9 +57,16 @@ def fetch_flood_warnings():
     posted_warnings = load_posted_warnings()
     
     for feed_url in RSS_FEEDS:
+        print(f"🔍 Checking RSS feed: {feed_url}")  # ✅ Print the feed being searched
         logging.info(f"Checking feed: {feed_url}")
         feed = feedparser.parse(feed_url)
-        
+
+        # ✅ Check if the feed is empty or has an issue
+        if not feed.entries:
+            print(f"⚠️ No data found in {feed_url}")
+            logging.warning(f"No data found in {feed_url}")
+            continue  # Skip to the next feed
+
         for entry in feed.entries:
             title = entry.title.strip()
             link = entry.link
@@ -72,11 +79,14 @@ def fetch_flood_warnings():
                 message = f"🚨 {title} has been issued. \nMore info: {link}"
                 warnings.append((title, message))
                 logging.info(f"New flood warning detected: {title}")
+                print(f"✅ New flood warning found: {title}")  # ✅ Print newly detected warnings
             else:
                 logging.debug(f"Skipping duplicate or non-flood warning: {title}")
+                print(f"⏭️ Skipping: {title}")  # ✅ Print skipped entries for debugging
 
     if not warnings:
         logging.info("No new flood warnings found.")
+        print("🚫 No new flood warnings found.")
 
     return warnings
 
@@ -87,6 +97,7 @@ def post_to_bluesky(message):
 
     if not username or not password:
         logging.error("❌ Error: Missing BlueSky credentials.")
+        print("❌ Error: Missing BlueSky credentials.")
         return
 
     try:
@@ -94,12 +105,16 @@ def post_to_bluesky(message):
         client.login(username, password)
         client.send_post(text=message)
         logging.info(f"✅ Successfully posted to BlueSky: {message}")
+        print(f"✅ Posted to BlueSky: {message}")  # ✅ Print confirmation of posts
     except Exception as e:
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
+        print(f"❌ Failed to post to BlueSky: {str(e)}")  # ✅ Print errors
 
 def check_and_post_warnings():
     """Fetch and post new flood warnings to BlueSky."""
     logging.info("Fetching flood warnings...")
+    print("🚀 Starting flood warning check...")
+    
     warnings = fetch_flood_warnings()
     
     if warnings:
@@ -108,8 +123,10 @@ def check_and_post_warnings():
             save_posted_warning(warning_id)  # ✅ Save posted warning to prevent reposting
     else:
         logging.info("No new flood warnings found.")
+        print("✅ No new flood warnings to post.")
 
     logging.info("Bot execution completed.")
+    print("🏁 Bot execution completed.")
 
 if __name__ == "__main__":
     check_and_post_warnings()
