@@ -5,6 +5,9 @@ import logging
 
 # Setup logging
 LOG_FILE = "debug.log"
+WARNINGS_LOG_FILE = "warnings_log.txt"
+POSTED_WARNINGS_FILE = "posted_warnings.txt"
+
 logging.basicConfig(
     filename=LOG_FILE,
     filemode="a",
@@ -31,8 +34,6 @@ RSS_FEEDS = [
     "http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml",  # Queensland
 ]
 
-POSTED_WARNINGS_FILE = "posted_warnings.txt"
-
 def load_posted_warnings():
     """Load the list of previously posted warnings."""
     if os.path.exists(POSTED_WARNINGS_FILE):
@@ -45,6 +46,11 @@ def save_posted_warning(warning_id):
     with open(POSTED_WARNINGS_FILE, "a") as file:
         file.write(f"{warning_id}\n")
 
+def log_warning(title):
+    """Log all found warnings (new or old) to warnings_log.txt."""
+    with open(WARNINGS_LOG_FILE, "a") as file:
+        file.write(f"{title}\n")
+
 def fetch_flood_warnings():
     """Fetch flood warnings from multiple BoM RSS feeds, only keeping those with 'Flood Warning' in the title."""
     warnings = []
@@ -55,14 +61,16 @@ def fetch_flood_warnings():
         feed = feedparser.parse(feed_url)
         
         for entry in feed.entries:
-            title = entry.title
+            title = entry.title.strip()
             link = entry.link
-            warning_id = title.strip()  # Unique identifier (title)
+
+            # Log every warning (new or duplicate)
+            log_warning(title)
 
             # ✅ Only collect new warnings that contain "Flood Warning"
-            if "Flood Warning" in title and warning_id not in posted_warnings:
+            if "Flood Warning" in title and title not in posted_warnings:
                 message = f"🚨 {title} has been issued. \nMore info: {link}"
-                warnings.append((warning_id, message))
+                warnings.append((title, message))
                 logging.info(f"New flood warning detected: {title}")
             else:
                 logging.debug(f"Skipping duplicate or non-flood warning: {title}")
