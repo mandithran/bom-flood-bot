@@ -1,4 +1,5 @@
 import feedparser
+import requests
 from atproto import Client
 import os
 import logging
@@ -34,6 +35,11 @@ RSS_FEEDS = [
     "http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml",  # Queensland
 ]
 
+# User-Agent header to bypass 403 errors
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+}
+
 def load_posted_warnings():
     """Load the list of previously posted warnings."""
     if os.path.exists(POSTED_WARNINGS_FILE):
@@ -57,32 +63,44 @@ def fetch_flood_warnings():
     posted_warnings = load_posted_warnings()
     
     for feed_url in RSS_FEEDS:
-        print(f"🔍 Checking RSS feed: {feed_url}")  # ✅ Print the feed being searched
+        print(f"🔍 Checking RSS feed: {feed_url}")
         logging.info(f"Checking feed: {feed_url}")
-        feed = feedparser.parse(feed_url)
 
-        # ✅ Check if the feed is empty or has an issue
-        if not feed.entries:
-            print(f"⚠️ No data found in {feed_url}")
-            logging.warning(f"No data found in {feed_url}")
-            continue  # Skip to the next feed
+        try:
+            response = requests.get(feed_url, headers=HEADERS)
 
-        for entry in feed.entries:
-            title = entry.title.strip()
-            link = entry.link
+            if response.status_code != 200:
+                print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
+                logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
+                continue  # Skip to the next feed
 
-            # Log every warning (new or duplicate)
-            log_warning(title)
+            feed = feedparser.parse(response.content)
 
-            # ✅ Only collect new warnings that contain "Flood Warning"
-            if "Flood Warning" in title and title not in posted_warnings:
-                message = f"🚨 {title} has been issued. \nMore info: {link}"
-                warnings.append((title, message))
-                logging.info(f"New flood warning detected: {title}")
-                print(f"✅ New flood warning found: {title}")  # ✅ Print newly detected warnings
-            else:
-                logging.debug(f"Skipping duplicate or non-flood warning: {title}")
-                print(f"⏭️ Skipping: {title}")  # ✅ Print skipped entries for debugging
+            if not feed.entries:
+                print(f"⚠️ No data found in {feed_url}")
+                logging.warning(f"No data found in {feed_url}")
+                continue  # Skip to the next feed
+
+            for entry in feed.entries:
+                title = entry.title.strip()
+                link = entry.link
+
+                # Log every warning (new or duplicate)
+                log_warning(title)
+
+                # ✅ Only collect new warnings that contain "Flood Warning"
+                if "Flood Warning" in title and title not in posted_warnings:
+                    message = f"🚨 {title} has been issued. \nMore info: {link}"
+                    warnings.append((title, message))
+                    logging.info(f"New flood warning detected: {title}")
+                    print(f"✅ New flood warning found: {title}")
+                else:
+                    logging.debug(f"Skipping duplicate or non-flood warning: {title}")
+                    print(f"⏭️ Skipping: {title}")
+
+        except requests.RequestException as e:
+            print(f"❌ Error fetching {feed_url}: {e}")
+            logging.error(f"Error fetching {feed_url}: {e}")
 
     if not warnings:
         logging.info("No new flood warnings found.")
@@ -105,10 +123,10 @@ def post_to_bluesky(message):
         client.login(username, password)
         client.send_post(text=message)
         logging.info(f"✅ Successfully posted to BlueSky: {message}")
-        print(f"✅ Posted to BlueSky: {message}")  # ✅ Print confirmation of posts
+        print(f"✅ Posted to BlueSky: {message}")
     except Exception as e:
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
-        print(f"❌ Failed to post to BlueSky: {str(e)}")  # ✅ Print errors
+        print(f"❌ Failed to post to BlueSky: {str(e)}")
 
 def check_and_post_warnings():
     """Fetch and post new flood warnings to BlueSky."""
