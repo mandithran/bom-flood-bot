@@ -1,9 +1,12 @@
 name: BoM Flood Warning Bot
 
 on:
+  push:  # ✅ Runs automatically on every commit
+    branches:
+      - main  # Change this if you're using a different branch
   schedule:
-    - cron: "*/5 * * * *"  # Runs every 5 minutes
-  workflow_dispatch:  # Allows manual triggering
+    - cron: "*/5 * * * *"  # ✅ Runs every 5 minutes
+  workflow_dispatch:  # ✅ Allows manual triggering
 
 jobs:
   post_warnings:
@@ -26,3 +29,10 @@ jobs:
         env:
           BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
+
+      - name: Upload debug logs (for troubleshooting)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-logs
+          path: debug.log
