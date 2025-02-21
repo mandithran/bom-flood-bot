@@ -1,12 +1,12 @@
 name: BoM Flood Warning Bot
 
 on:
-  push:  # ✅ Runs automatically on every commit
+  push:
     branches:
-      - main  # Change this if you're using a different branch
+      - main  # Runs when you push to main
   schedule:
-    - cron: "*/5 * * * *"  # ✅ Runs every 5 minutes
-  workflow_dispatch:  # ✅ Allows manual triggering
+    - cron: "*/5 * * * *"  # Runs every 5 minutes
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   post_warnings:
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # ✅ Updated to v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4  # ✅ No change needed
         with:
           python-version: "3.9"
 
@@ -32,7 +32,7 @@ jobs:
 
       - name: Upload debug logs (for troubleshooting)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # ✅ Updated from v3 to v4
         with:
           name: debug-logs
           path: debug.log
