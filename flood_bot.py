@@ -3,7 +3,7 @@ from atproto import Client
 import os
 import logging
 
-# Setup logging to a file (debug.log) and console
+# Setup logging
 LOG_FILE = "debug.log"
 logging.basicConfig(
     filename=LOG_FILE,
@@ -20,7 +20,7 @@ logging.getLogger().addHandler(console_handler)
 
 logging.info("Starting flood warning bot execution.")
 
-# List of BoM Flood Warnings RSS Feeds
+# BoM Flood Warnings RSS Feeds
 RSS_FEEDS = [
     "http://www.bom.gov.au/fwo/IDZ00060.warnings_wa.xml",  # Western Australia
     "http://www.bom.gov.au/fwo/IDZ00057.warnings_sa.xml",  # South Australia
@@ -31,9 +31,24 @@ RSS_FEEDS = [
     "http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml",  # Queensland
 ]
 
+POSTED_WARNINGS_FILE = "posted_warnings.txt"
+
+def load_posted_warnings():
+    """Load the list of previously posted warnings."""
+    if os.path.exists(POSTED_WARNINGS_FILE):
+        with open(POSTED_WARNINGS_FILE, "r") as file:
+            return set(file.read().splitlines())  # Read warnings as a set (fast lookups)
+    return set()
+
+def save_posted_warning(warning_id):
+    """Save a new warning ID to the posted warnings file."""
+    with open(POSTED_WARNINGS_FILE, "a") as file:
+        file.write(f"{warning_id}\n")
+
 def fetch_flood_warnings():
     """Fetch flood warnings from multiple BoM RSS feeds, only keeping those with 'Flood Warning' in the title."""
     warnings = []
+    posted_warnings = load_posted_warnings()
     
     for feed_url in RSS_FEEDS:
         logging.info(f"Checking feed: {feed_url}")
@@ -42,20 +57,20 @@ def fetch_flood_warnings():
         for entry in feed.entries:
             title = entry.title
             link = entry.link
+            warning_id = title.strip()  # Unique identifier (title)
 
-            # ✅ Only collect warnings that contain "Flood Warning" in the title
-            if "Flood Warning" in title:
+            # ✅ Only collect new warnings that contain "Flood Warning"
+            if "Flood Warning" in title and warning_id not in posted_warnings:
                 message = f"🚨 {title} has been issued. \nMore info: {link}"
-                warnings.append(message)
-                logging.info(f"Found flood warning: {title}")
+                warnings.append((warning_id, message))
+                logging.info(f"New flood warning detected: {title}")
             else:
-                logging.debug(f"Skipping non-flood warning: {title}")  # Debug log for skipped entries
+                logging.debug(f"Skipping duplicate or non-flood warning: {title}")
 
     if not warnings:
-        logging.info("No flood warnings found.")
+        logging.info("No new flood warnings found.")
 
     return warnings
-
 
 def post_to_bluesky(message):
     """Post a message to BlueSky using the atproto package."""
@@ -74,20 +89,19 @@ def post_to_bluesky(message):
     except Exception as e:
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
 
-
 def check_and_post_warnings():
     """Fetch and post new flood warnings to BlueSky."""
     logging.info("Fetching flood warnings...")
     warnings = fetch_flood_warnings()
     
     if warnings:
-        for warning in warnings:
-            post_to_bluesky(warning)
+        for warning_id, message in warnings:
+            post_to_bluesky(message)
+            save_posted_warning(warning_id)  # ✅ Save posted warning to prevent reposting
     else:
         logging.info("No new flood warnings found.")
 
     logging.info("Bot execution completed.")
-
 
 if __name__ == "__main__":
     check_and_post_warnings()
