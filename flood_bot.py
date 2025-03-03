@@ -1,6 +1,6 @@
 import feedparser
 import requests
-from atproto import Client
+from atproto import Client, client_utils
 import os
 import logging
 from datetime import datetime, timezone
@@ -132,9 +132,11 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
         # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
         if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
             clean_warning_title = clean_title(title)  # ✅ Remove everything before "Flood Warning"
-            # ✅ Format the BlueSky post
-            message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
-            warnings.append((warning_id, message))
+            # ✅ Format the BlueSky post using TextBuilder
+            bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link("bom.gov.au", link)
+            # ✅ Convert TextBuilder to plain text in test mode
+            plain_text_message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
+            warnings.append((warning_id, bluesky_message, plain_text_message))
             logging.info(f"New flood warning detected: {title} ({pub_date})")
             print(f"✅ New flood warning found: {title} ({pub_date})")
         else:
@@ -143,7 +145,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
 
     return warnings
 
-def post_to_bluesky(message):
+def post_to_bluesky(bluesky_message, plain_text_message):
     """Post a message to BlueSky using the atproto package."""
     username = os.getenv("BLUESKY_USERNAME")
     password = os.getenv("BLUESKY_PASSWORD")
@@ -156,9 +158,9 @@ def post_to_bluesky(message):
     try:
         client = Client()
         client.login(username, password)
-        client.send_post(text=message)
-        logging.info(f"✅ Successfully posted to BlueSky: {message}")
-        print(f"✅ Posted to BlueSky: {message}")
+        client.send_post(text=bluesky_message)
+        logging.info(f"✅ Successfully posted to BlueSky: {plain_text_message}")
+        print(f"✅ Posted to BlueSky: {plain_text_message}")
     except Exception as e:
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
         print(f"❌ Failed to post to BlueSky: {str(e)}")
@@ -174,12 +176,12 @@ if __name__ == "__main__":
     warnings = fetch_flood_warnings(use_local_file=use_local_file)
 
     if warnings:
-        for warning_id, message in warnings:
+        for warning_id, bluesky_message, plain_text_message in warnings:
             if use_local_file:
-                print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Test mode prints instead of posting
+                print(f"📝 [TEST MODE] Would post:\n{plain_text_message}")  # ✅ Print plain text for testing
                 save_posted_warning(warning_id)
             else:
-                post_to_bluesky(message)  # ✅ Live mode posts to BlueSky
+                post_to_bluesky(bluesky_message)  # ✅ Post in live mode to BlueSky
                 print(f"💾 Saving posted warning: {warning_id}")
                 save_posted_warning(warning_id)
     else:
