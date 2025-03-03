@@ -130,7 +130,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
         warning_id = f"{title}|{pub_date}"
 
         # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
-        if "Flood Warning" in title and warning_id not in posted_warnings:
+        if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
             clean_warning_title = clean_title(title)  # ✅ Remove everything before "Flood Warning"
             # ✅ Format the BlueSky post
             message = f"🚨 {clean_warning_title} has been issued.\n[More info]({link})"
