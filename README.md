@@ -1,2 +1,2 @@
 # bom-flood-bot
-Bot that posts BoM Flood Warnings to Bluesky
+Bot that posts links to BoM Flood Warnings and Flood Watches to Bluesky
