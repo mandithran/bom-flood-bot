@@ -25,6 +25,10 @@ logging.getLogger().addHandler(console_handler)
 
 logging.info("Starting flood warning bot execution.")
 
+# Ensure posted warnings file exists
+if not os.path.exists(POSTED_WARNINGS_FILE):
+    open(POSTED_WARNINGS_FILE, "a").close()  # ✅ Create empty file if it doesn't exist
+
 # BoM Flood Warnings RSS Feeds
 RSS_FEEDS = [
     "http://www.bom.gov.au/fwo/IDZ00060.warnings_wa.xml",  # Western Australia
@@ -42,10 +46,9 @@ HEADERS = {
 }
 
 def load_posted_warnings():
-    """Load previously posted warnings (title + pubDate)."""
-    if os.path.exists(POSTED_WARNINGS_FILE):
-        with open(POSTED_WARNINGS_FILE, "r") as file:
-            return set(file.read().splitlines())  # Read warnings as a set
+    """Load previously posted warnings (title + pubDate) from file."""
+    with open(POSTED_WARNINGS_FILE, "r") as file:
+        return set(file.read().splitlines())  # Read warnings as a set
     return set()
 
 def save_posted_warning(warning_id):
@@ -65,7 +68,7 @@ def parse_pub_date(entry):
     except AttributeError:
         return "Unknown Date"  # If pubDate is missing, use a placeholder
 
-def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld.xml"):
+def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
     """Fetch flood warnings from RSS feeds, or use a local XML file for testing."""
     warnings = []
     posted_warnings = load_posted_warnings()
@@ -121,10 +124,6 @@ def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld
         warning_id = f"{title}|{pub_date}"
 
         # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
-        print("############## posted_warnings ###############")
-        print(posted_warnings)
-        print("############## warning_id ###############")
-        print(warning_id)
         if "Flood Warning" in title and warning_id not in posted_warnings:
             message = f"🚨 {title} (Issued: {pub_date})\nMore info: {link}"
             warnings.append((warning_id, message))
@@ -157,7 +156,7 @@ def post_to_bluesky(message):
         print(f"❌ Failed to post to BlueSky: {str(e)}")
 
 if __name__ == "__main__":
-    use_local_file = True  # ✅ Set to True for local file testing, False for live fetch
+    use_local_file = True # ✅ Set to True for local file testing, False for live fetch
 
     print("🚀 Starting flood warning check...")
     warnings = fetch_flood_warnings(use_local_file=use_local_file)
@@ -166,6 +165,7 @@ if __name__ == "__main__":
         for warning_id, message in warnings:
             if use_local_file:
                 print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Only print in test mode
+                save_posted_warning(warning_id)  # ✅ Save warning ID (title + pubDate)
             else:
                 post_to_bluesky(message)  # ✅ Post to BlueSky in live mode
                 save_posted_warning(warning_id)  # ✅ Save warning ID (title + pubDate)

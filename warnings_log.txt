@@ -68,3 +68,73 @@ for
                 parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
 2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
 2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03T00:54:37+00:00 | 03/10:54 EST Tropical Cyclone Advice for Queensland
+2025-03-03T01:00:30+00:00 | 03/11:00 EST Tropical Cyclone Information Bulletin
+2025-03-03T05:50:14+00:00 | 03/15:50 EST Marine Wind Warning Summary for Queensland
+2025-03-03T03:39:59+00:00 | 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek
+2025-03-03T03:42:32+00:00 | 03/13:42 EST Flood Warning Summary for Queensland
+2025-03-03T02:57:14+00:00 | 03/12:57 EST Flood Watch for South East Queensland
+2025-03-03T04:07:19+00:00 | 03/14:07 EST Heatwave Warning (QLD)
+2025-03-03T06:15:35+00:00 | 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
+2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03T00:54:37+00:00 | 03/10:54 EST Tropical Cyclone Advice for Queensland
+2025-03-03T01:00:30+00:00 | 03/11:00 EST Tropical Cyclone Information Bulletin
+2025-03-03T05:50:14+00:00 | 03/15:50 EST Marine Wind Warning Summary for Queensland
+2025-03-03T03:39:59+00:00 | 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek
+2025-03-03T03:42:32+00:00 | 03/13:42 EST Flood Warning Summary for Queensland
+2025-03-03T02:57:14+00:00 | 03/12:57 EST Flood Watch for South East Queensland
+2025-03-03T04:07:19+00:00 | 03/14:07 EST Heatwave Warning (QLD)
+2025-03-03T06:15:35+00:00 | 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
+2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03T00:54:37+00:00 | 03/10:54 EST Tropical Cyclone Advice for Queensland
+2025-03-03T01:00:30+00:00 | 03/11:00 EST Tropical Cyclone Information Bulletin
+2025-03-03T05:50:14+00:00 | 03/15:50 EST Marine Wind Warning Summary for Queensland
+2025-03-03T03:39:59+00:00 | 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek
+2025-03-03T03:42:32+00:00 | 03/13:42 EST Flood Warning Summary for Queensland
+2025-03-03T02:57:14+00:00 | 03/12:57 EST Flood Watch for South East Queensland
+2025-03-03T04:07:19+00:00 | 03/14:07 EST Heatwave Warning (QLD)
+2025-03-03T06:15:35+00:00 | 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
+2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03T00:54:37+00:00 | 03/10:54 EST Tropical Cyclone Advice for Queensland
+2025-03-03T01:00:30+00:00 | 03/11:00 EST Tropical Cyclone Information Bulletin
+2025-03-03T05:50:14+00:00 | 03/15:50 EST Marine Wind Warning Summary for Queensland
+2025-03-03T03:39:59+00:00 | 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek
+2025-03-03T03:42:32+00:00 | 03/13:42 EST Flood Warning Summary for Queensland
+2025-03-03T02:57:14+00:00 | 03/12:57 EST Flood Watch for South East Queensland
+2025-03-03T04:07:19+00:00 | 03/14:07 EST Heatwave Warning (QLD)
+2025-03-03T06:15:35+00:00 | 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
+2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03T00:54:37+00:00 | 03/10:54 EST Tropical Cyclone Advice for Queensland
+2025-03-03T01:00:30+00:00 | 03/11:00 EST Tropical Cyclone Information Bulletin
+2025-03-03T05:50:14+00:00 | 03/15:50 EST Marine Wind Warning Summary for Queensland
+2025-03-03T03:39:59+00:00 | 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek
+2025-03-03T03:42:32+00:00 | 03/13:42 EST Flood Warning Summary for Queensland
+2025-03-03T02:57:14+00:00 | 03/12:57 EST Flood Watch for South East Queensland
+2025-03-03T04:07:19+00:00 | 03/14:07 EST Heatwave Warning (QLD)
+2025-03-03T06:15:35+00:00 | 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+2025-03-03T06:01:30+00:00 | 03/16:01 EST Hazardous Surf Warning for Queensland
+2025-03-03T00:57:38+00:00 | 03/10:57 EST Tropical Cyclone Forecast Track Map
