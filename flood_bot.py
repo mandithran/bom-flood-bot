@@ -4,6 +4,7 @@ from atproto import Client
 import os
 import logging
 from datetime import datetime, timezone
+import re
 
 # Setup logging
 LOG_FILE = "debug.log"
@@ -68,6 +69,11 @@ def parse_pub_date(entry):
     except AttributeError:
         return "Unknown Date"  # If pubDate is missing, use a placeholder
 
+def clean_title(title):
+    """Remove the timestamp prefix (formatted as 'MM/DD:HH:mm TZ') but keep the full warning title."""
+    return re.sub(r"^\d{2}/\d{2}:\d{2} [A-Z]{3} ", "", title)  # ✅ Strip timestamp only
+    return match.group(1) if match else title  # Return cleaned title or original if not found
+
 def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
     """Fetch flood warnings from RSS feeds, or use a local XML file for testing."""
     warnings = []
@@ -125,7 +131,9 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
 
         # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
         if "Flood Warning" in title and warning_id not in posted_warnings:
-            message = f"🚨 {title} (Issued: {pub_date})\nMore info: {link}"
+            clean_warning_title = clean_title(title)  # ✅ Remove everything before "Flood Warning"
+            # ✅ Format the BlueSky post
+            message = f"🚨 {clean_warning_title} has been issued.\n[More info]({link})"
             warnings.append((warning_id, message))
             logging.info(f"New flood warning detected: {title} ({pub_date})")
             print(f"✅ New flood warning found: {title} ({pub_date})")
@@ -155,20 +163,25 @@ def post_to_bluesky(message):
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
         print(f"❌ Failed to post to BlueSky: {str(e)}")
 
-if __name__ == "__main__":
-    use_local_file = True # ✅ Set to True for local file testing, False for live fetch
+# Check if running inside GitHub Actions
+IS_CI = os.getenv("CI") == "true"
 
-    print("🚀 Starting flood warning check...")
+if __name__ == "__main__":
+    use_local_file = not IS_CI  # ✅ Use local file for testing if NOT running in CI
+
+    print(f"🚀 Starting flood warning check (Test Mode: {use_local_file})...")
+
     warnings = fetch_flood_warnings(use_local_file=use_local_file)
 
     if warnings:
         for warning_id, message in warnings:
             if use_local_file:
-                print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Only print in test mode
-                save_posted_warning(warning_id)  # ✅ Save warning ID (title + pubDate)
+                print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Test mode prints instead of posting
+                save_posted_warning(warning_id)
             else:
-                post_to_bluesky(message)  # ✅ Post to BlueSky in live mode
-                save_posted_warning(warning_id)  # ✅ Save warning ID (title + pubDate)
+                post_to_bluesky(message)  # ✅ Live mode posts to BlueSky
+                print(f"💾 Saving posted warning: {warning_id}")
+                save_posted_warning(warning_id)
     else:
         print("✅ No new flood warnings found.")
 
