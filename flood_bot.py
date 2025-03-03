@@ -57,54 +57,67 @@ def log_warning(title):
     with open(WARNINGS_LOG_FILE, "a") as file:
         file.write(f"{title}\n")
 
-def fetch_flood_warnings():
-    """Fetch flood warnings from multiple BoM RSS feeds, only keeping those with 'Flood Warning' in the title."""
+def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld.xml"):
+    """Fetch flood warnings from RSS feeds, or use a local XML file for testing."""
     warnings = []
     posted_warnings = load_posted_warnings()
-    
-    for feed_url in RSS_FEEDS:
-        print(f"🔍 Checking RSS feed: {feed_url}")
-        logging.info(f"Checking feed: {feed_url}")
 
+    if use_local_file:
+        print(f"📂 Loading warnings from local file: {local_file}")
+        logging.info(f"Loading warnings from local file: {local_file}")
         try:
-            response = requests.get(feed_url, headers=HEADERS)
+            with open(local_file, "r", encoding="utf-8") as file:
+                feed_content = file.read()
+        except FileNotFoundError:
+            print(f"❌ Local file '{local_file}' not found.")
+            logging.error(f"Local file '{local_file}' not found.")
+            return []
+        except Exception as e:
+            print(f"❌ Error reading local file: {e}")
+            logging.error(f"Error reading local file: {e}")
+            return []
+    else:
+        # Normal live-fetching mode
+        for feed_url in RSS_FEEDS:
+            print(f"🔍 Checking RSS feed: {feed_url}")
+            logging.info(f"Checking feed: {feed_url}")
 
-            if response.status_code != 200:
-                print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
-                logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
-                continue  # Skip to the next feed
+            try:
+                response = requests.get(feed_url, headers=HEADERS)
+                if response.status_code != 200:
+                    print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
+                    logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
+                    continue  # Skip to the next feed
+                feed_content = response.content
+            except requests.RequestException as e:
+                print(f"❌ Error fetching {feed_url}: {e}")
+                logging.error(f"Error fetching {feed_url}: {e}")
+                continue
 
-            feed = feedparser.parse(response.content)
+    # Parse the feed (either from a file or from live data)
+    feed = feedparser.parse(feed_content)
 
-            if not feed.entries:
-                print(f"⚠️ No data found in {feed_url}")
-                logging.warning(f"No data found in {feed_url}")
-                continue  # Skip to the next feed
+    if not feed.entries:
+        print("⚠️ No data found in feed.")
+        logging.warning("No data found in feed.")
+        return []
 
-            for entry in feed.entries:
-                title = entry.title.strip()
-                link = entry.link
+    for entry in feed.entries:
+        title = entry.title.strip()
+        link = entry.link
 
-                # Log every warning (new or duplicate)
-                log_warning(title)
+        # Log every warning (new or duplicate)
+        log_warning(title)
 
-                # ✅ Only collect new warnings that contain "Flood Warning"
-                if "Flood Warning" in title and title not in posted_warnings:
-                    message = f"🚨 {title} has been issued. \nMore info: {link}"
-                    warnings.append((title, message))
-                    logging.info(f"New flood warning detected: {title}")
-                    print(f"✅ New flood warning found: {title}")
-                else:
-                    logging.debug(f"Skipping duplicate or non-flood warning: {title}")
-                    print(f"⏭️ Skipping: {title}")
-
-        except requests.RequestException as e:
-            print(f"❌ Error fetching {feed_url}: {e}")
-            logging.error(f"Error fetching {feed_url}: {e}")
-
-    if not warnings:
-        logging.info("No new flood warnings found.")
-        print("🚫 No new flood warnings found.")
+        # ✅ Only collect new warnings that contain "Flood Warning"
+        if "Flood Warning" in title and title not in posted_warnings:
+            message = f"🚨 {title} has been issued. \nMore info: {link}"
+            warnings.append((title, message))
+            logging.info(f"New flood warning detected: {title}")
+            print(f"✅ New flood warning found: {title}")
+        else:
+            logging.debug(f"Skipping duplicate or non-flood warning: {title}")
+            print(f"⏭️ Skipping: {title}")
 
     return warnings
 
@@ -147,4 +160,19 @@ def check_and_post_warnings():
     print("🏁 Bot execution completed.")
 
 if __name__ == "__main__":
-    check_and_post_warnings()
+    use_local_file = True  # ✅ Set to True for testing with a local file, False for live fetch
+
+    print("🚀 Starting flood warning check...")
+    warnings = fetch_flood_warnings(use_local_file=use_local_file)
+
+    if warnings:
+        for warning_id, message in warnings:
+            if use_local_file:
+                print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Only print in test mode
+            else:
+                post_to_bluesky(message)  # ✅ Post to BlueSky in live mode
+                save_posted_warning(warning_id)  # ✅ Prevent duplicate posts
+    else:
+        print("✅ No new flood warnings found.")
+
+    print("🏁 Bot execution completed.")

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Weather Warnings for Queensland. Issued by the Australian Bureau of Meteorology</title>
+		<link>http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml</link>
+		<atom:link href="http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml" rel="self" type="application/rss+xml"/>
+		<description>Current weather warnings for Queensland, Australia including strong wind, gale, storm force and hurricane force wind warnings; tsunami; damaging waves; abnormally high tides; tropical cyclones; severe thunderstorms; severe weather; fire weather; flood; frost; driving; bushwalking; sheep graziers and other agricultural warnings.</description>
+		<language>en-au</language>
+		<copyright>Copyright: (C) Copyright Commonwealth of Australia 2010, Bureau of Meteorology (ABN 92637 533532), see http://www.bom.gov.au/other/copyright.shtml for terms and conditions of reuse.</copyright>
+		<webMaster>webops@bom.gov.au (Help desk)</webMaster>
+		<pubDate>Mon, 03 Mar 2025 06:25:40 GMT</pubDate>
+		<lastBuildDate>Mon, 03 Mar 2025 06:25:40 GMT</lastBuildDate>
+		<generator>Australian Bureau of Meteorology</generator>
+		<ttl>10</ttl>
+		<image>
+			<url>http://www.bom.gov.au/images/bom_logo_inline.gif</url>
+			<title>Weather Warnings for Queensland. Issued by the Australian Bureau of Meteorology</title>
+			<link>http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml</link>
+		</image>
+		<item>
+			<title>03/10:54 EST Tropical Cyclone Advice for Queensland</title>
+			<link>http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20023.html</link>
+			<pubDate>Mon, 03 Mar 2025 00:54:37 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20023.html</guid>
+		</item>
+		<item>
+			<title>03/11:00 EST Tropical Cyclone Information Bulletin</title>
+			<link>http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20065.txt</link>
+			<pubDate>Mon, 03 Mar 2025 01:00:30 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20065.txt</guid>
+		</item>
+		<item>
+			<title>03/15:50 EST Marine Wind Warning Summary for Queensland</title>
+			<link>http://www.bom.gov.au/qld/warnings/marinewind.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 05:50:14 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/qld/warnings/marinewind.shtml</guid>
+		</item>
+		<item>
+			<title>03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek</title>
+			<link>http://www.bom.gov.au/qld/warnings/flood/thomson-barcoo-cooper.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 03:39:59 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/qld/warnings/flood/thomson-barcoo-cooper.shtml</guid>
+		</item>
+		<item>
+			<title>03/13:42 EST Flood Warning Summary for Queensland</title>
+			<link>http://www.bom.gov.au/qld/warnings/flood/index.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 03:42:32 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/qld/warnings/flood/index.shtml</guid>
+		</item>
+		<item>
+			<title>03/12:57 EST Flood Watch for South East Queensland</title>
+			<link>http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20900.html</link>
+			<pubDate>Mon, 03 Mar 2025 02:57:14 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ20900.html</guid>
+		</item>
+		<item>
+			<title>03/14:07 EST Heatwave Warning (QLD)</title>
+			<link>http://www.bom.gov.au/qld/warnings/heatwave.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 04:07:19 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/qld/warnings/heatwave.shtml</guid>
+		</item>
+		<item>
+			<title>03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
+                
+            </title>
+			<link>http://www.bom.gov.au/products/IDQ21137.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 06:15:35 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/products/IDQ21137.shtml</guid>
+		</item>
+		<item>
+			<title>03/16:01 EST Hazardous Surf Warning for Queensland</title>
+			<link>http://www.bom.gov.au/qld/warnings/hazardoussurf.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 06:01:30 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/qld/warnings/hazardoussurf.shtml</guid>
+		</item>
+		<item>
+			<title>03/10:57 EST Tropical Cyclone Forecast Track Map</title>
+			<link>http://www.bom.gov.au/products/IDQ65002.shtml</link>
+			<pubDate>Mon, 03 Mar 2025 00:57:38 GMT</pubDate>
+			<guid isPermaLink="false">http://www.bom.gov.au/products/IDQ65002.shtml</guid>
+		</item>
+	</channel>
+</rss>
