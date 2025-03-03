@@ -3,6 +3,7 @@ import requests
 from atproto import Client
 import os
 import logging
+from datetime import datetime, timezone
 
 # Setup logging
 LOG_FILE = "debug.log"
@@ -41,21 +42,28 @@ HEADERS = {
 }
 
 def load_posted_warnings():
-    """Load the list of previously posted warnings."""
+    """Load previously posted warnings (title + pubDate)."""
     if os.path.exists(POSTED_WARNINGS_FILE):
         with open(POSTED_WARNINGS_FILE, "r") as file:
-            return set(file.read().splitlines())  # Read warnings as a set (fast lookups)
+            return set(file.read().splitlines())  # Read warnings as a set
     return set()
 
 def save_posted_warning(warning_id):
-    """Save a new warning ID to the posted warnings file."""
+    """Save a new warning ID (title + pubDate) to prevent duplicate posting."""
     with open(POSTED_WARNINGS_FILE, "a") as file:
-        file.write(f"{warning_id}\n")
+        file.write(f"{warning_id}\n")  # Store as "title|pubDate"
 
-def log_warning(title):
+def log_warning(title, pub_date):
     """Log all found warnings (new or old) to warnings_log.txt."""
     with open(WARNINGS_LOG_FILE, "a") as file:
-        file.write(f"{title}\n")
+        file.write(f"{pub_date} | {title}\n")
+
+def parse_pub_date(entry):
+    """Convert RSS pubDate to a standard datetime object."""
+    try:
+        return datetime(*entry.published_parsed[:6], tzinfo=timezone.utc).isoformat()  # Convert to UTC ISO string
+    except AttributeError:
+        return "Unknown Date"  # If pubDate is missing, use a placeholder
 
 def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld.xml"):
     """Fetch flood warnings from RSS feeds, or use a local XML file for testing."""
@@ -87,7 +95,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld
                 if response.status_code != 200:
                     print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
                     logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
-                    continue  # Skip to the next feed
+                    continue
                 feed_content = response.content
             except requests.RequestException as e:
                 print(f"❌ Error fetching {feed_url}: {e}")
@@ -105,19 +113,26 @@ def fetch_flood_warnings(use_local_file=False, local_file="IDZ00056.warnings_qld
     for entry in feed.entries:
         title = entry.title.strip()
         link = entry.link
+        pub_date = parse_pub_date(entry)  # Extract pubDate
 
-        # Log every warning (new or duplicate)
-        log_warning(title)
+        log_warning(title, pub_date)
 
-        # ✅ Only collect new warnings that contain "Flood Warning"
-        if "Flood Warning" in title and title not in posted_warnings:
-            message = f"🚨 {title} has been issued. \nMore info: {link}"
-            warnings.append((title, message))
-            logging.info(f"New flood warning detected: {title}")
-            print(f"✅ New flood warning found: {title}")
+        # Generate unique ID including pubDate
+        warning_id = f"{title}|{pub_date}"
+
+        # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
+        print("############## posted_warnings ###############")
+        print(posted_warnings)
+        print("############## warning_id ###############")
+        print(warning_id)
+        if "Flood Warning" in title and warning_id not in posted_warnings:
+            message = f"🚨 {title} (Issued: {pub_date})\nMore info: {link}"
+            warnings.append((warning_id, message))
+            logging.info(f"New flood warning detected: {title} ({pub_date})")
+            print(f"✅ New flood warning found: {title} ({pub_date})")
         else:
-            logging.debug(f"Skipping duplicate or non-flood warning: {title}")
-            print(f"⏭️ Skipping: {title}")
+            logging.debug(f"Skipping duplicate or previously posted warning: {title} ({pub_date})")
+            print(f"⏭️ Skipping: {title} ({pub_date})")
 
     return warnings
 
@@ -141,26 +156,8 @@ def post_to_bluesky(message):
         logging.error(f"❌ Failed to post to BlueSky: {str(e)}")
         print(f"❌ Failed to post to BlueSky: {str(e)}")
 
-def check_and_post_warnings():
-    """Fetch and post new flood warnings to BlueSky."""
-    logging.info("Fetching flood warnings...")
-    print("🚀 Starting flood warning check...")
-    
-    warnings = fetch_flood_warnings()
-    
-    if warnings:
-        for warning_id, message in warnings:
-            post_to_bluesky(message)
-            save_posted_warning(warning_id)  # ✅ Save posted warning to prevent reposting
-    else:
-        logging.info("No new flood warnings found.")
-        print("✅ No new flood warnings to post.")
-
-    logging.info("Bot execution completed.")
-    print("🏁 Bot execution completed.")
-
 if __name__ == "__main__":
-    use_local_file = True  # ✅ Set to True for testing with a local file, False for live fetch
+    use_local_file = True  # ✅ Set to True for local file testing, False for live fetch
 
     print("🚀 Starting flood warning check...")
     warnings = fetch_flood_warnings(use_local_file=use_local_file)
@@ -171,7 +168,7 @@ if __name__ == "__main__":
                 print(f"📝 [TEST MODE] Would post: {message}")  # ✅ Only print in test mode
             else:
                 post_to_bluesky(message)  # ✅ Post to BlueSky in live mode
-                save_posted_warning(warning_id)  # ✅ Prevent duplicate posts
+                save_posted_warning(warning_id)  # ✅ Save warning ID (title + pubDate)
     else:
         print("✅ No new flood warnings found.")
 

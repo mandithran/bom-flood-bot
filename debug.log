@@ -32,3 +32,215 @@ for
                 parts of Wide Bay and Burnett and Southeast Coast Forecast Districts.
 2025-03-03 17:43:34,535 - DEBUG - Skipping duplicate or non-flood warning: 03/16:01 EST Hazardous Surf Warning for Queensland
 2025-03-03 17:43:34,535 - DEBUG - Skipping duplicate or non-flood warning: 03/10:57 EST Tropical Cyclone Forecast Track Map
+2025-03-03 17:53:34,794 - INFO - Starting flood warning bot execution.
+2025-03-03 17:53:34,795 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00060.warnings_wa.xml
+2025-03-03 17:53:34,806 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:34,873 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00060.warnings_wa.xml HTTP/1.1" 200 1006
+2025-03-03 17:53:34,874 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00057.warnings_sa.xml
+2025-03-03 17:53:34,876 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:34,950 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00057.warnings_sa.xml HTTP/1.1" 200 703
+2025-03-03 17:53:34,950 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00058.warnings_tas.xml
+2025-03-03 17:53:34,952 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:34,991 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00058.warnings_tas.xml HTTP/1.1" 200 794
+2025-03-03 17:53:34,992 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00055.warnings_nt.xml
+2025-03-03 17:53:34,993 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:35,039 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00055.warnings_nt.xml HTTP/1.1" 200 794
+2025-03-03 17:53:35,039 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00054.warnings_nsw.xml
+2025-03-03 17:53:35,041 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:35,077 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00054.warnings_nsw.xml HTTP/1.1" 200 1165
+2025-03-03 17:53:35,078 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00059.warnings_vic.xml
+2025-03-03 17:53:35,079 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:35,126 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00059.warnings_vic.xml HTTP/1.1" 200 797
+2025-03-03 17:53:35,127 - INFO - Checking feed: http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml
+2025-03-03 17:53:35,128 - DEBUG - Starting new HTTP connection (1): www.bom.gov.au:80
+2025-03-03 17:53:35,193 - DEBUG - http://www.bom.gov.au:80 "GET /fwo/IDZ00056.warnings_qld.xml HTTP/1.1" 200 1254
+2025-03-03 17:53:35,207 - DEBUG - Skipping duplicate or previously posted warning: 03/16:46 EST Tropical Cyclone Advice for Queensland (2025-03-03T06:46:13+00:00)
+2025-03-03 17:53:35,207 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 17:53:35,207 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 17:53:35,207 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 17:53:35,208 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 17:53:35,208 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 17:53:35,208 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 17:53:35,208 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 17:53:35,208 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 17:53:35,209 - DEBUG - Skipping duplicate or previously posted warning: 03/16:46 EST Tropical Cyclone Forecast Track Map (2025-03-03T06:46:59+00:00)
+2025-03-03 17:53:35,210 - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2025-03-03 17:53:35,210 - DEBUG - load_verify_locations cafile='/Users/mandithran/opt/anaconda3/envs/floodbot/lib/python3.9/site-packages/certifi/cacert.pem'
+2025-03-03 17:53:35,257 - DEBUG - connect_tcp.started host='bsky.social' port=443 local_address=None timeout=5.0 socket_options=None
+2025-03-03 17:53:35,502 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11117cdc0>
+2025-03-03 17:53:35,502 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110e153c0> server_hostname='bsky.social' timeout=5.0
+2025-03-03 17:53:35,737 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11117cd90>
+2025-03-03 17:53:35,738 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:35,739 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:35,739 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-03-03 17:53:35,739 - DEBUG - send_request_body.complete
+2025-03-03 17:53:35,739 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:36,061 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 03 Mar 2025 06:53:36 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Access-Control-Allow-Origin', b'*'), (b'RateLimit-Limit', b'10'), (b'RateLimit-Remaining', b'9'), (b'RateLimit-Reset', b'1741071216'), (b'RateLimit-Policy', b'10;w=86400'), (b'ETag', b'W/"5e5-kOnmpSQli569HriAY4pGeaVAx/0"'), (b'Vary', b'Accept-Encoding'), (b'Content-Encoding', b'gzip')])
+2025-03-03 17:53:36,061 - INFO - HTTP Request: POST https://bsky.social/xrpc/com.atproto.server.createSession "HTTP/1.1 200 OK"
+2025-03-03 17:53:36,061 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-03-03 17:53:36,062 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:36,062 - DEBUG - response_closed.started
+2025-03-03 17:53:36,062 - DEBUG - response_closed.complete
+2025-03-03 17:53:36,070 - DEBUG - connect_tcp.started host='fuzzyfoot.us-west.host.bsky.network' port=443 local_address=None timeout=5.0 socket_options=None
+2025-03-03 17:53:36,263 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11118eb50>
+2025-03-03 17:53:36,263 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x110e153c0> server_hostname='fuzzyfoot.us-west.host.bsky.network' timeout=5.0
+2025-03-03 17:53:36,429 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x11118e670>
+2025-03-03 17:53:36,430 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-03-03 17:53:36,430 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:36,430 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-03-03 17:53:36,430 - DEBUG - send_request_body.complete
+2025-03-03 17:53:36,430 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-03-03 17:53:36,641 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'x-powered-by', b'Express'), (b'access-control-allow-origin', b'*'), (b'cache-control', b'private'), (b'vary', b'Authorization, Accept-Encoding'), (b'ratelimit-limit', b'3000'), (b'ratelimit-remaining', b'2999'), (b'ratelimit-reset', b'1740985116'), (b'ratelimit-policy', b'3000;w=300'), (b'content-length', b'525'), (b'content-type', b'application/json; charset=utf-8'), (b'atproto-repo-rev', b'3liog6mvj2t2l'), (b'atproto-content-labelers', b'did:plc:ar7c4by46qjdydhdevvrndac;redact'), (b'date', b'Mon, 03 Mar 2025 06:53:36 GMT'), (b'keep-alive', b'timeout=90'), (b'strict-transport-security', b'max-age=63072000')])
+2025-03-03 17:53:36,642 - INFO - HTTP Request: GET https://fuzzyfoot.us-west.host.bsky.network/xrpc/app.bsky.actor.getProfile?actor=bom-flood-bot.bsky.social "HTTP/1.1 200 OK"
+2025-03-03 17:53:36,642 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-03-03 17:53:36,642 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:36,642 - DEBUG - response_closed.started
+2025-03-03 17:53:36,642 - DEBUG - response_closed.complete
+2025-03-03 17:53:36,644 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:36,644 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:36,645 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-03-03 17:53:36,645 - DEBUG - send_request_body.complete
+2025-03-03 17:53:36,645 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:36,825 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'x-powered-by', b'Express'), (b'access-control-allow-origin', b'*'), (b'cache-control', b'private'), (b'vary', b'Authorization, Accept-Encoding'), (b'ratelimit-limit', b'5000'), (b'ratelimit-remaining', b'4997'), (b'ratelimit-reset', b'1740988416'), (b'ratelimit-policy', b'5000;w=3600'), (b'content-type', b'application/json; charset=utf-8'), (b'content-length', b'276'), (b'etag', b'W/"114-06G2hlYr6W6/4thkO5HjgVPOZ+o"'), (b'date', b'Mon, 03 Mar 2025 06:53:36 GMT'), (b'keep-alive', b'timeout=90'), (b'strict-transport-security', b'max-age=63072000')])
+2025-03-03 17:53:36,825 - INFO - HTTP Request: POST https://fuzzyfoot.us-west.host.bsky.network/xrpc/com.atproto.repo.createRecord "HTTP/1.1 200 OK"
+2025-03-03 17:53:36,825 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-03-03 17:53:36,826 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:36,826 - DEBUG - response_closed.started
+2025-03-03 17:53:36,826 - DEBUG - response_closed.complete
+2025-03-03 17:53:36,826 - INFO - ✅ Successfully posted to BlueSky: 🚨 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (Issued: 2025-03-03T03:39:59+00:00)
+More info: http://www.bom.gov.au/qld/warnings/flood/thomson-barcoo-cooper.shtml
+2025-03-03 17:53:36,827 - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2025-03-03 17:53:36,827 - DEBUG - load_verify_locations cafile='/Users/mandithran/opt/anaconda3/envs/floodbot/lib/python3.9/site-packages/certifi/cacert.pem'
+2025-03-03 17:53:36,869 - DEBUG - connect_tcp.started host='bsky.social' port=443 local_address=None timeout=5.0 socket_options=None
+2025-03-03 17:53:37,097 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1111b6d90>
+2025-03-03 17:53:37,098 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x1110b9cc0> server_hostname='bsky.social' timeout=5.0
+2025-03-03 17:53:37,330 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1111b6d60>
+2025-03-03 17:53:37,330 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:37,331 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:37,331 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-03-03 17:53:37,331 - DEBUG - send_request_body.complete
+2025-03-03 17:53:37,331 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:37,650 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 03 Mar 2025 06:53:37 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'X-Powered-By', b'Express'), (b'Access-Control-Allow-Origin', b'*'), (b'RateLimit-Limit', b'10'), (b'RateLimit-Remaining', b'9'), (b'RateLimit-Reset', b'1741071217'), (b'RateLimit-Policy', b'10;w=86400'), (b'ETag', b'W/"5e5-WOR74dt2prBkMlQXVWmebavqryM"'), (b'Vary', b'Accept-Encoding'), (b'Content-Encoding', b'gzip')])
+2025-03-03 17:53:37,651 - INFO - HTTP Request: POST https://bsky.social/xrpc/com.atproto.server.createSession "HTTP/1.1 200 OK"
+2025-03-03 17:53:37,651 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-03-03 17:53:37,651 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:37,651 - DEBUG - response_closed.started
+2025-03-03 17:53:37,651 - DEBUG - response_closed.complete
+2025-03-03 17:53:37,652 - DEBUG - connect_tcp.started host='fuzzyfoot.us-west.host.bsky.network' port=443 local_address=None timeout=5.0 socket_options=None
+2025-03-03 17:53:37,813 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1111bd1f0>
+2025-03-03 17:53:37,813 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x1110b9cc0> server_hostname='fuzzyfoot.us-west.host.bsky.network' timeout=5.0
+2025-03-03 17:53:37,979 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1111bd1c0>
+2025-03-03 17:53:37,979 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-03-03 17:53:37,980 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:37,980 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-03-03 17:53:37,980 - DEBUG - send_request_body.complete
+2025-03-03 17:53:37,980 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-03-03 17:53:38,189 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'x-powered-by', b'Express'), (b'access-control-allow-origin', b'*'), (b'cache-control', b'private'), (b'vary', b'Authorization, Accept-Encoding'), (b'ratelimit-limit', b'3000'), (b'ratelimit-remaining', b'2998'), (b'ratelimit-reset', b'1740985116'), (b'ratelimit-policy', b'3000;w=300'), (b'content-length', b'525'), (b'content-type', b'application/json; charset=utf-8'), (b'atproto-repo-rev', b'3ljheit6scw2i'), (b'atproto-content-labelers', b'did:plc:ar7c4by46qjdydhdevvrndac;redact'), (b'date', b'Mon, 03 Mar 2025 06:53:38 GMT'), (b'keep-alive', b'timeout=90'), (b'strict-transport-security', b'max-age=63072000')])
+2025-03-03 17:53:38,189 - INFO - HTTP Request: GET https://fuzzyfoot.us-west.host.bsky.network/xrpc/app.bsky.actor.getProfile?actor=bom-flood-bot.bsky.social "HTTP/1.1 200 OK"
+2025-03-03 17:53:38,189 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-03-03 17:53:38,189 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:38,189 - DEBUG - response_closed.started
+2025-03-03 17:53:38,189 - DEBUG - response_closed.complete
+2025-03-03 17:53:38,190 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:38,191 - DEBUG - send_request_headers.complete
+2025-03-03 17:53:38,191 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-03-03 17:53:38,191 - DEBUG - send_request_body.complete
+2025-03-03 17:53:38,191 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-03-03 17:53:38,375 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'x-powered-by', b'Express'), (b'access-control-allow-origin', b'*'), (b'cache-control', b'private'), (b'vary', b'Authorization, Accept-Encoding'), (b'ratelimit-limit', b'5000'), (b'ratelimit-remaining', b'4994'), (b'ratelimit-reset', b'1740988416'), (b'ratelimit-policy', b'5000;w=3600'), (b'content-type', b'application/json; charset=utf-8'), (b'content-length', b'276'), (b'etag', b'W/"114-U/9G3nzv25tmY2+FgBnNKlciHuE"'), (b'date', b'Mon, 03 Mar 2025 06:53:38 GMT'), (b'keep-alive', b'timeout=90'), (b'strict-transport-security', b'max-age=63072000')])
+2025-03-03 17:53:38,375 - INFO - HTTP Request: POST https://fuzzyfoot.us-west.host.bsky.network/xrpc/com.atproto.repo.createRecord "HTTP/1.1 200 OK"
+2025-03-03 17:53:38,375 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-03-03 17:53:38,376 - DEBUG - receive_response_body.complete
+2025-03-03 17:53:38,376 - DEBUG - response_closed.started
+2025-03-03 17:53:38,376 - DEBUG - response_closed.complete
+2025-03-03 17:53:38,376 - INFO - ✅ Successfully posted to BlueSky: 🚨 03/13:42 EST Flood Warning Summary for Queensland (Issued: 2025-03-03T03:42:32+00:00)
+More info: http://www.bom.gov.au/qld/warnings/flood/index.shtml
+2025-03-03 17:55:29,735 - INFO - Starting flood warning bot execution.
+2025-03-03 17:55:29,736 - INFO - Loading warnings from local file: sample_rss.xml
+2025-03-03 17:55:29,736 - ERROR - Local file 'sample_rss.xml' not found.
+2025-03-03 17:56:24,591 - INFO - Starting flood warning bot execution.
+2025-03-03 17:56:24,591 - INFO - Loading warnings from local file: sample_rss.xml
+2025-03-03 17:56:24,591 - ERROR - Local file 'sample_rss.xml' not found.
+2025-03-03 17:57:09,048 - INFO - Starting flood warning bot execution.
+2025-03-03 17:57:09,049 - INFO - Loading warnings from local file: IDZ00056.warnings_qld.xml
+2025-03-03 17:57:09,060 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-03 17:57:09,060 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 17:57:09,061 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 17:57:09,061 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 17:57:09,061 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 17:57:09,062 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 17:57:09,062 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 17:57:09,062 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 17:57:09,062 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 17:57:09,063 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-03 17:57:17,611 - INFO - Starting flood warning bot execution.
+2025-03-03 17:57:17,611 - INFO - Loading warnings from local file: IDZ00056.warnings_qld.xml
+2025-03-03 17:57:17,623 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-03 17:57:17,623 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 17:57:17,623 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 17:57:17,624 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 17:57:17,624 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 17:57:17,624 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 17:57:17,625 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 17:57:17,625 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 17:57:17,625 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 17:57:17,625 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-03 17:57:37,821 - INFO - Starting flood warning bot execution.
+2025-03-03 17:57:37,821 - INFO - Loading warnings from local file: IDZ00056.warnings_qld.xml
+2025-03-03 17:57:37,835 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-03 17:57:37,835 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 17:57:37,835 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 17:57:37,836 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 17:57:37,836 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 17:57:37,836 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 17:57:37,836 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 17:57:37,837 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 17:57:37,837 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 17:57:37,837 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-03 18:00:36,011 - INFO - Starting flood warning bot execution.
+2025-03-03 18:00:36,012 - INFO - Loading warnings from local file: IDZ00056.warnings_qld.xml
+2025-03-03 18:00:36,024 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-03 18:00:36,024 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 18:00:36,024 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 18:00:36,025 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 18:00:36,026 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 18:00:36,026 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 18:00:36,026 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 18:00:36,027 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 18:00:36,027 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 18:00:36,027 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-03 18:02:20,524 - INFO - Starting flood warning bot execution.
+2025-03-03 18:02:20,525 - INFO - Loading warnings from local file: IDZ00056.warnings_qld.xml
+2025-03-03 18:02:20,539 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-03 18:02:20,539 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-03 18:02:20,539 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-03 18:02:20,540 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-03 18:02:20,540 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-03 18:02:20,540 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-03 18:02:20,540 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-03 18:02:20,541 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-03 18:02:20,541 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-03 18:02:20,541 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
