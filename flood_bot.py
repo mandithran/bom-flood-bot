@@ -133,7 +133,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
         if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
             clean_warning_title = clean_title(title)  # ✅ Remove everything before "Flood Warning"
             # ✅ Format the BlueSky post using TextBuilder
-            bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link("bom.gov.au", link)
+            bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link(str(link), link)
             # ✅ Convert TextBuilder to plain text in test mode
             plain_text_message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
             warnings.append((warning_id, bluesky_message, plain_text_message))
