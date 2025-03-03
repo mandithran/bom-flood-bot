@@ -181,7 +181,7 @@ if __name__ == "__main__":
                 print(f"📝 [TEST MODE] Would post:\n{plain_text_message}")  # ✅ Print plain text for testing
                 save_posted_warning(warning_id)
             else:
-                post_to_bluesky(bluesky_message)  # ✅ Post in live mode to BlueSky
+                post_to_bluesky(bluesky_message, plain_text_message)  # ✅ Post in live mode to BlueSky
                 print(f"💾 Saving posted warning: {warning_id}")
                 save_posted_warning(warning_id)
     else:
