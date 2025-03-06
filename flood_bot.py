@@ -6,7 +6,7 @@ import logging
 from datetime import datetime, timezone
 import re
 
-ENABLE_POSTING = True  # ✅ Change this to True when you're ready to post again
+ENABLE_POSTING = False  # ✅ Change this to True when you're ready to post again
 
 # Setup logging
 LOG_FILE = "debug.log"
