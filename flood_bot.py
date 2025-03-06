@@ -6,6 +6,8 @@ import logging
 from datetime import datetime, timezone
 import re
 
+ENABLE_POSTING = False  # ✅ Change this to True when you're ready to post again
+
 # Setup logging
 LOG_FILE = "debug.log"
 WARNINGS_LOG_FILE = "warnings_log.txt"
@@ -209,7 +211,8 @@ if __name__ == "__main__":
                 print(f"📝 [TEST MODE] Would post:\n{plain_text_message}")  # ✅ Print plain text for testing
                 save_posted_warning(warning_id)
             else:
-                #post_to_bluesky(bluesky_message, plain_text_message)  # ✅ Post in live mode to BlueSky
+                if ENABLE_POSTING:
+                    post_to_bluesky(bluesky_message, plain_text_message)  # ✅ Post in live mode to BlueSky
                 print(f"💾 Saving posted warning: {warning_id}")
                 save_posted_warning(warning_id)
     else:
