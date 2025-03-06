@@ -46,7 +46,7 @@ jobs:
         if: always()  # ✅ Ensure cache is always updated
         uses: actions/cache@v4
         with:
-          path: posted_warnings.txt
+          path: ./posted_warnings.txt
           key: posted-warnings-cache
 
       - name: Save updated posted warnings as an artifact

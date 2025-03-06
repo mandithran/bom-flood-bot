@@ -11,7 +11,7 @@ ENABLE_POSTING = False  # ✅ Change this to True when you're ready to post agai
 # Setup logging
 LOG_FILE = "debug.log"
 WARNINGS_LOG_FILE = "warnings_log.txt"
-POSTED_WARNINGS_FILE = "posted_warnings.txt"
+POSTED_WARNINGS_FILE = "./posted_warnings.txt"
 
 logging.basicConfig(
     filename=LOG_FILE,
