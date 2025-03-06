@@ -11,6 +11,9 @@ on:
 jobs:
   post_warnings:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write  # ✅ Allows both downloading & uploading artifacts
+      contents: read  # ✅ Required for repository access
 
     steps:
       - name: Checkout repository
