@@ -36,15 +36,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug check if posted_warnings.txt exists
+        run: ls -lah posted_warnings.txt || echo "posted_warnings.txt not found"
+      
       - name: Restore previously posted warnings (only if artifact exists)  # ✅ Correct indentation
         if: env.FOUND_ARTIFACT == 'true'
         uses: actions/download-artifact@v4
         with:
           name: posted-warnings
           path: .
-
-      - name: Debug check if posted_warnings.txt exists
-        run: ls -lah posted_warnings.txt || echo "posted_warnings.txt not found"
 
       - name: Set up Python
         uses: actions/setup-python@v4
