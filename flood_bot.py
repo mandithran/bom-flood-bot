@@ -48,14 +48,26 @@ HEADERS = {
 
 def load_posted_warnings():
     """Load previously posted warnings (title + pubDate) from file."""
+    if not os.path.exists(POSTED_WARNINGS_FILE):
+        print("📁 Creating missing posted_warnings.txt")
+        open(POSTED_WARNINGS_FILE, "a").close()
+        return set()
+
     with open(POSTED_WARNINGS_FILE, "r") as file:
-        return set(file.read().splitlines())  # Read warnings as a set
-    return set()
+        posted_warnings = set(file.read().splitlines())
+
+    print(f"📜 Previously posted warnings ({len(posted_warnings)}): {posted_warnings}")  # ✅ Debug print
+    logging.info(f"Loaded {len(posted_warnings)} previously posted warnings")
+    return posted_warnings
 
 def save_posted_warning(warning_id):
     """Save a new warning ID (title + pubDate) to prevent duplicate posting."""
     with open(POSTED_WARNINGS_FILE, "a") as file:
-        file.write(f"{warning_id}\n")  # Store as "title|pubDate"
+        file.write(f"{warning_id}\n")
+        file.flush()  # ✅ Force immediate file write
+        os.fsync(file.fileno())  # ✅ Ensure changes are saved
+    print(f"💾 Saved posted warning: {warning_id}")
+    logging.info(f"Saved posted warning: {warning_id}")
 
 def log_warning(title, pub_date):
     """Log all found warnings (new or old) to warnings_log.txt."""
