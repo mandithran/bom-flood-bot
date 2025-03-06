@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: posted_warnings.txt
-          key: posted-warnings-cache-v1-${{ github.run_number }}  # ✅ Generates a new cache key per run
+          key:  # ✅ Generates a new cache key per run
           restore-keys: |
             posted-warnings-cache-v1-  # ✅ Falls back to the latest available cache
 
