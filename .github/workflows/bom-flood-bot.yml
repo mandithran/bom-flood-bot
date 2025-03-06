@@ -19,15 +19,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore posted warnings cache
-        id: cache-posted-warnings
-        uses: actions/cache@v4
+      - name: Restore previously posted warnings (ignore errors if missing)
+        continue-on-error: true  # ✅ Ignore missing artifacts on first run
+        uses: actions/download-artifact@v4
         with:
-          path: posted_warnings.txt
-          key:  # ✅ Generates a new cache key per run
-          restore-keys: |
-            posted-warnings-cache-v1-  # ✅ Falls back to the latest available cache
-
+          name: posted-warnings
+          path: .
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -46,12 +43,6 @@ jobs:
       - name: Debug - Check file contents after running bot
         run: cat ./posted_warnings.txt || echo "posted_warnings.txt is empty after execution"
 
-      - name: Save updated posted warnings to cache
-        if: always()  # ✅ Ensure cache updates even if the workflow fails
-        uses: actions/cache@v4
-        with:
-          path: posted_warnings.txt
-          key: posted-warnings-cache-v1-${{ github.run_number }}  # ✅ Store as a new cache version
 
       - name: Save updated posted warnings as an artifact
         if: always() 
