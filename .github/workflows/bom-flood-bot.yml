@@ -39,7 +39,7 @@ jobs:
           BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
 
-      - name: Debug: Check file contents after running bot
+      - name: Debug - Check file contents after running bot
         run: cat posted_warnings.txt || echo "posted_warnings.txt is empty after execution"
 
       - name: Save updated posted warnings to cache
