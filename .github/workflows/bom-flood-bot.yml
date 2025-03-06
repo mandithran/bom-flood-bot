@@ -19,12 +19,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore previously posted warnings (ignore errors if missing)
-        continue-on-error: true  # ✅ Ignore missing artifacts on first run
-        uses: actions/download-artifact@v4
-        with:
-          name: posted-warnings
-          path: .
+      - name: List available artifacts
+        run: |
+          echo "Checking available artifacts..."
+          gh api repos/${{ github.repository }}/actions/artifacts | jq '.artifacts[] | {name: .name, created_at: .created_at}'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore the latest posted warnings artifact
+        continue-on-error: true  # ✅ Prevents failure if no artifact exists
+        run: |
+          ARTIFACT_ID=$(gh api repos/${{ github.repository }}/actions/artifacts | jq -r '.artifacts[] | select(.name=="posted-warnings") | .id' | sort -n | tail -1)
+          if [ -n "$ARTIFACT_ID" ]; then
+            echo "Downloading artifact ID: $ARTIFACT_ID"
+            gh api repos/${{ github.repository }}/actions/artifacts/$ARTIFACT_ID/zip > artifact.zip
+            unzip -o artifact.zip
+            rm artifact.zip
+          else
+            echo "No existing artifact found. Using empty posted_warnings.txt."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
