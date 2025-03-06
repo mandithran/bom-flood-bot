@@ -31,6 +31,7 @@ logging.info("Starting flood warning bot execution.")
 # Ensure posted warnings file exists
 if not os.path.exists(POSTED_WARNINGS_FILE):
     open(POSTED_WARNINGS_FILE, "a").close()  # ✅ Create empty file if it doesn't exist
+    logging.info((f"Posted_warnings.txt not found in cache. Creating empty posted_warnings.txt file"))
 
 # BoM Flood Warnings RSS Feeds
 RSS_FEEDS = [
