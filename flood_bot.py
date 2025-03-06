@@ -216,6 +216,10 @@ if __name__ == "__main__":
                     post_to_bluesky(bluesky_message, plain_text_message)  # ✅ Post in live mode to BlueSky
                 print(f"💾 Saving posted warning: {warning_id}")
                 save_posted_warning(warning_id)
+
+        print(f"📜 Updated posted warnings ({len(posted_warnings)}): {posted_warnings}")  # ✅ Debug print
+        logging.info(f"Updated posted warnings {len(posted_warnings)}")
+
     else:
         print("✅ No new flood warnings found.")
 
