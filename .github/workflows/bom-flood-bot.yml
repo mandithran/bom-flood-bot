@@ -3,10 +3,10 @@ name: BoM Flood Warning Bot
 on:
   push:
     branches:
-      - main  # Runs when you push to main
+      - main
   schedule:
     - cron: "*/5 * * * *"  # Runs every 5 minutes
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   post_warnings:
@@ -14,10 +14,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # ✅ Updated to v4
+        uses: actions/checkout@v4
+
+      - name: Restore previously posted warnings
+        uses: actions/download-artifact@v4
+        with:
+          name: posted-warnings
+          path: .
 
       - name: Set up Python
-        uses: actions/setup-python@v4  # ✅ No change needed
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
@@ -30,9 +36,8 @@ jobs:
           BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
 
-      - name: Upload debug logs (for troubleshooting)
-        if: always()
-        uses: actions/upload-artifact@v4  # ✅ Updated from v3 to v4
+      - name: Save updated posted warnings
+        uses: actions/upload-artifact@v4
         with:
-          name: debug-logs
-          path: debug.log
+          name: posted-warnings
+          path: posted_warnings.txt

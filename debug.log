@@ -607,3 +607,51 @@ for
                 parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
 2025-03-03 19:07:02,702 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
 2025-03-03 19:07:02,703 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-06 12:26:46,449 - INFO - Starting flood warning bot execution.
+2025-03-06 12:26:46,450 - INFO - Loading warnings from local file: sample_rss.xml
+2025-03-06 12:26:46,463 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-06 12:26:46,463 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-06 12:26:46,464 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-06 12:26:46,464 - DEBUG - Skipping duplicate or previously posted warning: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-06 12:26:46,464 - DEBUG - Skipping duplicate or previously posted warning: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-06 12:26:46,465 - INFO - New flood warning detected: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-06 12:26:46,465 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-06 12:26:46,465 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-06 12:26:46,465 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-06 12:26:46,466 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-06 12:27:25,042 - INFO - Starting flood warning bot execution.
+2025-03-06 12:27:25,044 - INFO - Loading warnings from local file: sample_rss.xml
+2025-03-06 12:27:25,065 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-06 12:27:25,066 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-06 12:27:25,066 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-06 12:27:25,067 - INFO - New flood warning detected: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-06 12:27:25,067 - INFO - New flood warning detected: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-06 12:27:25,068 - INFO - New flood warning detected: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-06 12:27:25,068 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-06 12:27:25,068 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-06 12:27:25,069 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-06 12:27:25,069 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
+2025-03-06 12:27:35,134 - INFO - Starting flood warning bot execution.
+2025-03-06 12:27:35,134 - INFO - Loading warnings from local file: sample_rss.xml
+2025-03-06 12:27:35,149 - DEBUG - Skipping duplicate or previously posted warning: 03/10:54 EST Tropical Cyclone Advice for Queensland (2025-03-03T00:54:37+00:00)
+2025-03-06 12:27:35,150 - DEBUG - Skipping duplicate or previously posted warning: 03/11:00 EST Tropical Cyclone Information Bulletin (2025-03-03T01:00:30+00:00)
+2025-03-06 12:27:35,150 - DEBUG - Skipping duplicate or previously posted warning: 03/15:50 EST Marine Wind Warning Summary for Queensland (2025-03-03T05:50:14+00:00)
+2025-03-06 12:27:35,150 - DEBUG - Skipping duplicate or previously posted warning: 03/13:39 EST Minor Flood Warning for the Thomson River and Cooper Creek (2025-03-03T03:39:59+00:00)
+2025-03-06 12:27:35,151 - DEBUG - Skipping duplicate or previously posted warning: 03/13:42 EST Flood Warning Summary for Queensland (2025-03-03T03:42:32+00:00)
+2025-03-06 12:27:35,151 - DEBUG - Skipping duplicate or previously posted warning: 03/12:57 EST Flood Watch for South East Queensland (2025-03-03T02:57:14+00:00)
+2025-03-06 12:27:35,151 - DEBUG - Skipping duplicate or previously posted warning: 03/14:07 EST Heatwave Warning (QLD) (2025-03-03T04:07:19+00:00)
+2025-03-06 12:27:35,152 - DEBUG - Skipping duplicate or previously posted warning: 03/16:15 EST 
+                Coastal Hazard Warning
+            
+for 
+                parts of Wide Bay and Burnett and Southeast Coast Forecast Districts. (2025-03-03T06:15:35+00:00)
+2025-03-06 12:27:35,152 - DEBUG - Skipping duplicate or previously posted warning: 03/16:01 EST Hazardous Surf Warning for Queensland (2025-03-03T06:01:30+00:00)
+2025-03-06 12:27:35,153 - DEBUG - Skipping duplicate or previously posted warning: 03/10:57 EST Tropical Cyclone Forecast Track Map (2025-03-03T00:57:38+00:00)
