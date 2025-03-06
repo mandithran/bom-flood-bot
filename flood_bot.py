@@ -87,13 +87,14 @@ def clean_title(title):
     return match.group(1) if match else title  # Return cleaned title or original if not found
 
 def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
-    """Fetch flood warnings from RSS feeds, or use a local XML file for testing."""
+    """Fetch flood warnings from RSS feeds or use a local test file."""
     warnings = []
     posted_warnings = load_posted_warnings()
 
     if use_local_file:
         print(f"📂 Loading warnings from local file: {local_file}")
         logging.info(f"Loading warnings from local file: {local_file}")
+
         try:
             with open(local_file, "r", encoding="utf-8") as file:
                 feed_content = file.read()
@@ -106,7 +107,11 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
             logging.error(f"Error reading local file: {e}")
             return []
     else:
-        # Normal live-fetching mode
+        # ✅ Log that it's fetching from live feeds
+        print("🌐 Fetching live flood warnings from BoM feeds...")
+        logging.info("Fetching live flood warnings from BoM feeds...")
+
+        feed_content = None
         for feed_url in RSS_FEEDS:
             print(f"🔍 Checking RSS feed: {feed_url}")
             logging.info(f"Checking feed: {feed_url}")
@@ -117,13 +122,21 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
                     print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
                     logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
                     continue
+
                 feed_content = response.content
+                break  # ✅ Stop after the first successful fetch
+
             except requests.RequestException as e:
                 print(f"❌ Error fetching {feed_url}: {e}")
                 logging.error(f"Error fetching {feed_url}: {e}")
-                continue
 
-    # Parse the feed (either from a file or from live data)
+        if feed_content is None:
+            print("⚠️ All feed fetch attempts failed! No warnings available.")
+            logging.error("All feed fetch attempts failed! No warnings available.")
+            return []
+
+    # ✅ Log that the feed was parsed
+    print("📜 Parsing RSS feed content...")
     feed = feedparser.parse(feed_content)
 
     if not feed.entries:
@@ -134,28 +147,29 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
     for entry in feed.entries:
         title = entry.title.strip()
         link = entry.link
-        pub_date = parse_pub_date(entry)  # Extract pubDate
+        pub_date = parse_pub_date(entry)
 
         log_warning(title, pub_date)
 
-        # Generate unique ID including pubDate
         warning_id = f"{title}|{pub_date}"
 
-        # ✅ Only collect new warnings that contain "Flood Warning" and have not been posted before
         if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
-            clean_warning_title = clean_title(title)  # ✅ Remove everything before "Flood Warning"
+            clean_warning_title = clean_title(title)
+
             # ✅ Format the BlueSky post using TextBuilder
             bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link(str(link), link)
-            # ✅ Convert TextBuilder to plain text in test mode
             plain_text_message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
+
             warnings.append((warning_id, bluesky_message, plain_text_message))
             logging.info(f"New flood warning detected: {title} ({pub_date})")
-            print(f"✅ New flood warning found: {title} ({pub_date})")
+            print(f"✅ New flood alert found: {title} ({pub_date})")
+
         else:
             logging.debug(f"Skipping duplicate or previously posted warning: {title} ({pub_date})")
             print(f"⏭️ Skipping: {title} ({pub_date})")
 
     return warnings
+
 
 def post_to_bluesky(bluesky_message, plain_text_message):
     """Post a message to BlueSky using the atproto package."""
@@ -181,7 +195,11 @@ def post_to_bluesky(bluesky_message, plain_text_message):
 IS_CI = os.getenv("CI") == "true"
 
 if __name__ == "__main__":
-    use_local_file = not IS_CI  # ✅ Use local file for testing if NOT running in CI
+    use_local_file = False  # ✅ Default to live mode
+
+    # ✅ Only use test file if running manually (not in CI)
+    if os.getenv("CI") is None:
+        use_local_file = True
 
     print(f"🚀 Starting flood warning check (Test Mode: {use_local_file})...")
 
@@ -200,3 +218,4 @@ if __name__ == "__main__":
         print("✅ No new flood warnings found.")
 
     print("🏁 Bot execution completed.")
+
