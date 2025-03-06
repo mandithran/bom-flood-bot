@@ -87,7 +87,7 @@ def clean_title(title):
     return match.group(1) if match else title  # Return cleaned title or original if not found
 
 def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
-    """Fetch flood warnings from RSS feeds or use a local test file."""
+    """Fetch flood warnings from all BoM RSS feeds or use a local test file."""
     warnings = []
     posted_warnings = load_posted_warnings()
 
@@ -98,6 +98,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
         try:
             with open(local_file, "r", encoding="utf-8") as file:
                 feed_content = file.read()
+            feeds = [feedparser.parse(feed_content)]  # ✅ Parse local file as a single feed
         except FileNotFoundError:
             print(f"❌ Local file '{local_file}' not found.")
             logging.error(f"Local file '{local_file}' not found.")
@@ -111,7 +112,7 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
         print("🌐 Fetching live flood warnings from BoM feeds...")
         logging.info("Fetching live flood warnings from BoM feeds...")
 
-        feed_content = None
+        feeds = []  # ✅ Store all parsed feeds
         for feed_url in RSS_FEEDS:
             print(f"🔍 Checking RSS feed: {feed_url}")
             logging.info(f"Checking feed: {feed_url}")
@@ -121,52 +122,49 @@ def fetch_flood_warnings(use_local_file=False, local_file="sample_rss.xml"):
                 if response.status_code != 200:
                     print(f"⚠️ Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
                     logging.warning(f"Failed to fetch feed {feed_url}. Status Code: {response.status_code}")
-                    continue
+                    continue  # ✅ Skip and continue to the next feed
 
-                feed_content = response.content
-                break  # ✅ Stop after the first successful fetch
+                feeds.append(feedparser.parse(response.content))  # ✅ Store all feeds
 
             except requests.RequestException as e:
                 print(f"❌ Error fetching {feed_url}: {e}")
                 logging.error(f"Error fetching {feed_url}: {e}")
 
-        if feed_content is None:
-            print("⚠️ All feed fetch attempts failed! No warnings available.")
-            logging.error("All feed fetch attempts failed! No warnings available.")
-            return []
-
-    # ✅ Log that the feed was parsed
-    print("📜 Parsing RSS feed content...")
-    feed = feedparser.parse(feed_content)
-
-    if not feed.entries:
-        print("⚠️ No data found in feed.")
-        logging.warning("No data found in feed.")
+    if not feeds:
+        print("⚠️ All feed fetch attempts failed! No warnings available.")
+        logging.error("All feed fetch attempts failed! No warnings available.")
         return []
 
-    for entry in feed.entries:
-        title = entry.title.strip()
-        link = entry.link
-        pub_date = parse_pub_date(entry)
+    # ✅ Process all collected feeds
+    for feed in feeds:
+        if not feed.entries:
+            print("⚠️ No data found in feed.")
+            logging.warning("No data found in feed.")
+            continue  # ✅ Skip empty feeds
 
-        log_warning(title, pub_date)
+        for entry in feed.entries:
+            title = entry.title.strip()
+            link = entry.link
+            pub_date = parse_pub_date(entry)
 
-        warning_id = f"{title}|{pub_date}"
+            log_warning(title, pub_date)
 
-        if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
-            clean_warning_title = clean_title(title)
+            warning_id = f"{title}|{pub_date}"
 
-            # ✅ Format the BlueSky post using TextBuilder
-            bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link(str(link), link)
-            plain_text_message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
+            if any(keyword in title for keyword in ["Flood Warning", "Flood Watch"]) and warning_id not in posted_warnings:
+                clean_warning_title = clean_title(title)
 
-            warnings.append((warning_id, bluesky_message, plain_text_message))
-            logging.info(f"New flood warning detected: {title} ({pub_date})")
-            print(f"✅ New flood alert found: {title} ({pub_date})")
+                # ✅ Format the BlueSky post using TextBuilder
+                bluesky_message = client_utils.TextBuilder().text(f"🚨 {clean_warning_title} has been issued.\nMore info:\n").link(str(link), link)
+                plain_text_message = f"🚨 {clean_warning_title} has been issued.\nMore info:\n{link}"
 
-        else:
-            logging.debug(f"Skipping duplicate or previously posted warning: {title} ({pub_date})")
-            print(f"⏭️ Skipping: {title} ({pub_date})")
+                warnings.append((warning_id, bluesky_message, plain_text_message))
+                logging.info(f"New flood warning detected: {title} ({pub_date})")
+                print(f"✅ New flood alert found: {title} ({pub_date})")
+
+            else:
+                logging.debug(f"Skipping duplicate or previously posted warning: {title} ({pub_date})")
+                print(f"⏭️ Skipping: {title} ({pub_date})")
 
     return warnings
 
