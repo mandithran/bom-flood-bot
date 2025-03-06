@@ -16,12 +16,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore previously posted warnings
+      - name: Ensure posted_warnings.txt exists before downloading
+        run: |
+          if [ ! -f posted_warnings.txt ]; then
+            echo "Creating empty posted_warnings.txt..."
+            touch posted_warnings.txt
+          fi
+
+      - name: Check if artifact exists
+        id: check_artifact
+        continue-on-error: true
+        run: |
+          ARTIFACT_COUNT=$(gh api repos/${{ github.repository }}/actions/artifacts --paginate | jq '.artifacts | length')
+          if [ "$ARTIFACT_COUNT" -gt "0" ]; then
+            echo "FOUND_ARTIFACT=true" >> $GITHUB_ENV
+          else
+            echo "FOUND_ARTIFACT=false" >> $GITHUB_ENV
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore previously posted warnings (only if artifact exists)
+        if: env.FOUND_ARTIFACT == 'true'
         uses: actions/download-artifact@v4
         with:
           name: posted-warnings
           path: .
-          merge-multiple: true  # ✅ Ensures artifacts from previous workflow runs are available
 
       - name: Debug check if posted_warnings.txt exists
         run: ls -lah posted_warnings.txt || echo "posted_warnings.txt not found"
