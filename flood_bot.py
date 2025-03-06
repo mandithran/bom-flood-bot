@@ -67,10 +67,14 @@ def save_posted_warning(warning_id):
     """Save a new warning ID (title + pubDate) to prevent duplicate posting."""
     with open(POSTED_WARNINGS_FILE, "a") as file:
         file.write(f"{warning_id}\n")
-        file.flush()  # ✅ Force immediate file write
-        os.fsync(file.fileno())  # ✅ Ensure changes are saved
+        file.flush()  # ✅ Force immediate write
+        os.fsync(file.fileno())  # ✅ Ensure changes are physically saved
     print(f"💾 Saved posted warning: {warning_id}")
     logging.info(f"Saved posted warning: {warning_id}")
+
+    # ✅ Force GitHub to recognize the file has changed
+    os.system(f"echo 'Updated at {datetime.now()}' >> {POSTED_WARNINGS_FILE}")
+
 
 def log_warning(title, pub_date):
     """Log all found warnings (new or old) to warnings_log.txt."""

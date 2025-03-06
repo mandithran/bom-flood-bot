@@ -39,13 +39,18 @@ jobs:
           BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
 
+      - name: Debug: Check file contents after running bot
+        run: cat posted_warnings.txt || echo "posted_warnings.txt is empty after execution"
+
       - name: Save updated posted warnings to cache
+        if: always()  # ✅ Ensure cache is always updated
         uses: actions/cache@v4
         with:
-          path: ./posted_warnings.txt
+          path: posted_warnings.txt
           key: posted-warnings-cache
 
       - name: Save updated posted warnings as an artifact
+        if: always() 
         uses: actions/upload-artifact@v4
         with:
           name: posted-warnings
