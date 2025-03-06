@@ -22,7 +22,7 @@ jobs:
       - name: Restore posted warnings cache
         uses: actions/cache@v4
         with:
-          path: posted_warnings.txt
+          path: ./posted_warnings.txt
           key: posted-warnings-cache
 
       - name: Set up Python
@@ -42,11 +42,11 @@ jobs:
       - name: Save updated posted warnings to cache
         uses: actions/cache@v4
         with:
-          path: posted_warnings.txt
+          path: ./posted_warnings.txt
           key: posted-warnings-cache
 
-      - name: Upload posted_warnings.txt as artifact
+      - name: Save updated posted warnings as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: posted-warnings
-          path: posted_warnings.txt
+          path: ./posted_warnings.txt
