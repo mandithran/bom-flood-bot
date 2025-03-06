@@ -26,15 +26,8 @@ jobs:
           path: posted_warnings.txt
           key: posted-warnings-cache-${{ github.run_id }}
 
-      - name: Ensure posted_warnings.txt exists
-        run: |
-          if [ ! -f posted_warnings.txt ]; then
-            echo "Creating empty posted_warnings.txt..."
-            touch posted_warnings.txt
-          fi
-
-      - name: Debug check if posted_warnings.txt exists
-        run: cat posted_warnings.txt || echo "posted_warnings.txt not found"
+      - name: Print the contents of posted_warnings.txt
+        run: cat posted_warnings.txt || echo "posted_warnings.txt is empty or missing"
 
       - name: Set up Python
         uses: actions/setup-python@v4
