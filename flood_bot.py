@@ -47,7 +47,7 @@ HEADERS = {
 }
 
 def load_posted_warnings():
-    """Load previously posted warnings (title + pubDate) from file."""
+    """Load previously posted warnings (title + pubDate) from file, ensuring the file exists."""
     if not os.path.exists(POSTED_WARNINGS_FILE):
         print("📁 Creating missing posted_warnings.txt")
         open(POSTED_WARNINGS_FILE, "a").close()

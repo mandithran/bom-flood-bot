@@ -16,11 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore previously posted warnings
+      - name: Restore previously posted warnings (ignore errors if missing)
+        continue-on-error: true  # ✅ Ignore missing artifacts on the first run
         uses: actions/download-artifact@v4
         with:
           name: posted-warnings
           path: .
+
+      - name: Ensure posted_warnings.txt exists
+        run: |
+          if [ ! -f posted_warnings.txt ]; then
+            echo "Creating posted_warnings.txt..."
+            touch posted_warnings.txt
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v4
