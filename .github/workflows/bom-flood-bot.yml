@@ -25,9 +25,6 @@ jobs:
           path: posted_warnings.txt
           key: posted-warnings-cache
 
-      - name: Print the contents of posted_warnings.txt
-        run: cat posted_warnings.txt || echo "posted_warnings.txt is empty or missing"
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -47,3 +44,9 @@ jobs:
         with:
           path: posted_warnings.txt
           key: posted-warnings-cache
+
+      - name: Upload posted_warnings.txt as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: posted-warnings
+          path: posted_warnings.txt
