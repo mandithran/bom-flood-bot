@@ -217,8 +217,11 @@ if __name__ == "__main__":
                 print(f"💾 Saving posted warning: {warning_id}")
                 save_posted_warning(warning_id)
 
-        print(f"📜 Updated posted warnings ({len(posted_warnings)}): {posted_warnings}")  # ✅ Debug print
-        logging.info(f"Updated posted warnings {len(posted_warnings)}")
+        with open(POSTED_WARNINGS_FILE, "r") as file:
+            posted_warnings = set(file.read().splitlines())
+
+            print(f"📜 Updated posted warnings ({len(posted_warnings)}): {posted_warnings}")  # ✅ Debug print
+            logging.info(f"Updated posted warnings {len(posted_warnings)} previously posted warnings")
 
     else:
         print("✅ No new flood warnings found.")
