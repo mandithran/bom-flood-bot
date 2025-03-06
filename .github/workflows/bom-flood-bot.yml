@@ -23,11 +23,11 @@ jobs:
             touch posted_warnings.txt
           fi
 
-      - name: Check if posted-warnings artifact exists  # ✅ Correct indentation
+      - name: Check if posted-warnings artifact exists
         id: check_artifact
         continue-on-error: true
         run: |
-          ARTIFACT_FOUND=$(gh api repos/${{ github.repository }}/actions/artifacts --paginate | jq '.artifacts[] | select(.name=="posted-warnings") | .id' | wc -l)
+          ARTIFACT_FOUND=$(gh api repos/${{ github.repository }}/actions/artifacts --paginate | jq -r '.artifacts[] | select(.name=="posted-warnings") | .id' | wc -l)
           if [ "$ARTIFACT_FOUND" -gt "0" ]; then
             echo "FOUND_ARTIFACT=true" >> $GITHUB_ENV
           else
@@ -36,15 +36,23 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
+      - name: Debug Available Artifacts
+        run: gh api repos/${{ github.repository }}/actions/artifacts --paginate | jq '.artifacts[].name'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
       - name: Debug check if posted_warnings.txt exists
         run: ls -lah posted_warnings.txt || echo "posted_warnings.txt not found"
       
-      - name: Restore previously posted warnings (only if artifact exists)  # ✅ Correct indentation
+      - name: Restore previously posted warnings (only if artifact exists)
         if: env.FOUND_ARTIFACT == 'true'
         uses: actions/download-artifact@v4
         with:
           name: posted-warnings
           path: .
+
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -65,3 +73,5 @@ jobs:
         with:
           name: posted-warnings
           path: posted_warnings.txt
+          retention-days: 365  # ✅ Ensures artifact is kept for 1 year
+
