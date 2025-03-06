@@ -23,6 +23,13 @@ jobs:
             touch posted_warnings.txt
           fi
 
+      - name: Upload initial empty posted_warnings.txt if missing
+        if: always()  # ✅ Always check for this condition
+        uses: actions/upload-artifact@v4
+        with:
+          name: posted-warnings
+          path: posted_warnings.txt
+
       - name: Restore previously posted warnings (ignore errors if missing)
         continue-on-error: true  # ✅ Ignore missing artifacts on first run
         uses: actions/download-artifact@v4
