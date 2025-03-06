@@ -20,11 +20,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Restore posted warnings cache
-        id: cache-posted-warnings
         uses: actions/cache@v4
         with:
           path: posted_warnings.txt
-          key: posted-warnings-cache-${{ github.run_id }}
+          key: posted-warnings-cache
 
       - name: Print the contents of posted_warnings.txt
         run: cat posted_warnings.txt || echo "posted_warnings.txt is empty or missing"
@@ -44,8 +43,7 @@ jobs:
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
 
       - name: Save updated posted warnings to cache
-        if: always()  # ✅ Ensure cache is always updated
         uses: actions/cache@v4
         with:
           path: posted_warnings.txt
-          key: posted-warnings-cache-${{ github.run_id }}
+          key: posted-warnings-cache
