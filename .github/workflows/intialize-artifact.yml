@@ -23,3 +23,4 @@ jobs:
         with:
           name: posted-warnings
           path: posted_warnings.txt
+          retention-days: 7  # ✅ Keep artifact for 7 days so it can be used in future runs

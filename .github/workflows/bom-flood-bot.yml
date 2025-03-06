@@ -21,6 +21,7 @@ jobs:
         with:
           name: posted-warnings
           path: .
+          merge-multiple: true  # ✅ Ensures artifacts from previous workflow runs are available
 
       - name: Debug check if posted_warnings.txt exists
         run: ls -lah posted_warnings.txt || echo "posted_warnings.txt not found"
